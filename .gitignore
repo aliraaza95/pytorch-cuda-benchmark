@@ -1,0 +1,53 @@
+# Benchmark outputs
+/results/tmp/
+
+# Dataset
+/data/
+
+# Editor settings
+.idea/
+.vs/
+.vscode/
+*.suo
+*.user
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model artifacts
+*.ckpt
+*.pt
+*.pth
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python build artifacts
+*.egg-info/
+build/
+dist/
+
+# Python caches and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing, coverage, and analysis caches
+.coverage
+.coverage.*
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+
+# Virtual environments
+.venv/
+env/
+venv/
