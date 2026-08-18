@@ -1,5 +1,6 @@
 """Benchmark planning and execution utilities."""
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
@@ -69,14 +70,22 @@ def run_benchmark(
     config: BenchmarkConfig,
     *,
     data_directory: str | Path = "data",
+    progress_callback: (
+        Callable[[int, int, BenchmarkCase], None] | None
+    ) = None,
 ) -> tuple[BenchmarkResult, ...]:
     """Execute every run in the configured benchmark matrix."""
 
     _validate_hardware(config)
 
+    plan = create_benchmark_plan(config)
+    total_runs = len(plan)
     results: list[BenchmarkResult] = []
 
-    for case in create_benchmark_plan(config):
+    for run_number, case in enumerate(plan, start=1):
+        if progress_callback is not None:
+            progress_callback(run_number, total_runs, case)
+
         set_random_seed(case.seed)
 
         model = create_cifar10_resnet18()
