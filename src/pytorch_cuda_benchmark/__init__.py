@@ -1,6 +1,7 @@
 """CPU and CUDA training benchmark utilities."""
 
 from .config import BenchmarkConfig, load_config
+from .data import create_cifar10_training_loader
 from .environment import (
     EnvironmentMetadata,
     GpuMetadata,
@@ -17,6 +18,7 @@ __all__ = [
     "EnvironmentMetadata",
     "GpuMetadata",
     "collect_environment_metadata",
+    "create_cifar10_training_loader",
     "create_data_generator",
     "load_config",
     "seed_data_worker",
