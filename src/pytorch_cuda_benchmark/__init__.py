@@ -20,6 +20,7 @@ from .environment import (
     collect_environment_metadata,
 )
 from .model import create_cifar10_resnet18
+from .plotting import BenchmarkPlotArtifact, create_benchmark_plots
 from .reproducibility import (
     create_data_generator,
     seed_data_worker,
@@ -33,6 +34,7 @@ __all__ = [
     "BenchmarkAnalysis",
     "BenchmarkCase",
     "BenchmarkConfig",
+    "BenchmarkPlotArtifact",
     "BenchmarkResult",
     "DevicePerformanceSummary",
     "EnvironmentMetadata",
@@ -42,6 +44,7 @@ __all__ = [
     "analyze_benchmark_results",
     "collect_environment_metadata",
     "create_benchmark_plan",
+    "create_benchmark_plots",
     "create_cifar10_resnet18",
     "create_cifar10_training_loader",
     "create_data_generator",
