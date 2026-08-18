@@ -13,11 +13,13 @@ from .reproducibility import (
     seed_data_worker,
     set_random_seed,
 )
+from .training import TrainingResult, train_and_measure
 
 __all__ = [
     "BenchmarkConfig",
     "EnvironmentMetadata",
     "GpuMetadata",
+    "TrainingResult",
     "collect_environment_metadata",
     "create_cifar10_resnet18",
     "create_cifar10_training_loader",
@@ -25,4 +27,5 @@ __all__ = [
     "load_config",
     "seed_data_worker",
     "set_random_seed",
+    "train_and_measure",
 ]
