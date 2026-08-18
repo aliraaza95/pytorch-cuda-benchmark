@@ -19,6 +19,7 @@ from .reproducibility import (
     seed_data_worker,
     set_random_seed,
 )
+from .results import SavedBenchmarkArtifacts, save_benchmark_artifacts
 from .training import TrainingResult, train_and_measure
 
 __all__ = [
@@ -27,6 +28,7 @@ __all__ = [
     "BenchmarkResult",
     "EnvironmentMetadata",
     "GpuMetadata",
+    "SavedBenchmarkArtifacts",
     "TrainingResult",
     "collect_environment_metadata",
     "create_benchmark_plan",
@@ -35,6 +37,7 @@ __all__ = [
     "create_data_generator",
     "load_config",
     "run_benchmark",
+    "save_benchmark_artifacts",
     "seed_data_worker",
     "set_random_seed",
     "train_and_measure",
