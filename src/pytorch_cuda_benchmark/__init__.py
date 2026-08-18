@@ -7,6 +7,7 @@ from .environment import (
     GpuMetadata,
     collect_environment_metadata,
 )
+from .model import create_cifar10_resnet18
 from .reproducibility import (
     create_data_generator,
     seed_data_worker,
@@ -18,6 +19,7 @@ __all__ = [
     "EnvironmentMetadata",
     "GpuMetadata",
     "collect_environment_metadata",
+    "create_cifar10_resnet18",
     "create_cifar10_training_loader",
     "create_data_generator",
     "load_config",
