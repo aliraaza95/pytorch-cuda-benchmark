@@ -1,5 +1,11 @@
 """CPU and CUDA training benchmark utilities."""
 
+from .analysis import (
+    BatchSizeSpeedup,
+    BenchmarkAnalysis,
+    DevicePerformanceSummary,
+    analyze_benchmark_results,
+)
 from .benchmark import (
     BenchmarkCase,
     BenchmarkResult,
@@ -23,13 +29,17 @@ from .results import SavedBenchmarkArtifacts, save_benchmark_artifacts
 from .training import TrainingResult, train_and_measure
 
 __all__ = [
+    "BatchSizeSpeedup",
+    "BenchmarkAnalysis",
     "BenchmarkCase",
     "BenchmarkConfig",
     "BenchmarkResult",
+    "DevicePerformanceSummary",
     "EnvironmentMetadata",
     "GpuMetadata",
     "SavedBenchmarkArtifacts",
     "TrainingResult",
+    "analyze_benchmark_results",
     "collect_environment_metadata",
     "create_benchmark_plan",
     "create_cifar10_resnet18",
