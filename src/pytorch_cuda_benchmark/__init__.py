@@ -1,5 +1,11 @@
 """CPU and CUDA training benchmark utilities."""
 
+from .benchmark import (
+    BenchmarkCase,
+    BenchmarkResult,
+    create_benchmark_plan,
+    run_benchmark,
+)
 from .config import BenchmarkConfig, load_config
 from .data import create_cifar10_training_loader
 from .environment import (
@@ -16,15 +22,19 @@ from .reproducibility import (
 from .training import TrainingResult, train_and_measure
 
 __all__ = [
+    "BenchmarkCase",
     "BenchmarkConfig",
+    "BenchmarkResult",
     "EnvironmentMetadata",
     "GpuMetadata",
     "TrainingResult",
     "collect_environment_metadata",
+    "create_benchmark_plan",
     "create_cifar10_resnet18",
     "create_cifar10_training_loader",
     "create_data_generator",
     "load_config",
+    "run_benchmark",
     "seed_data_worker",
     "set_random_seed",
     "train_and_measure",
