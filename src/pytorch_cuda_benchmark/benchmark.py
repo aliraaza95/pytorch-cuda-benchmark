@@ -3,7 +3,7 @@
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import cast
+from typing import TypeAlias, cast
 
 import torch
 from torch.utils.data import DataLoader
@@ -42,6 +42,17 @@ class BenchmarkResult:
     samples_per_second: float
 
 
+ProgressCallback: TypeAlias = Callable[
+    [int, int, BenchmarkCase],
+    None,
+]
+ResultCallback: TypeAlias = Callable[
+    [int, int, BenchmarkCase, BenchmarkResult],
+    None,
+]
+TrainingBatch: TypeAlias = tuple[torch.Tensor, torch.Tensor]
+
+
 def create_benchmark_plan(
     config: BenchmarkConfig,
 ) -> tuple[BenchmarkCase, ...]:
@@ -70,11 +81,14 @@ def run_benchmark(
     config: BenchmarkConfig,
     *,
     data_directory: str | Path = "data",
-    progress_callback: (
-        Callable[[int, int, BenchmarkCase], None] | None
-    ) = None,
+    progress_callback: ProgressCallback | None = None,
+    result_callback: ResultCallback | None = None,
 ) -> tuple[BenchmarkResult, ...]:
-    """Execute every run in the configured benchmark matrix."""
+    """Execute every run in the configured benchmark matrix.
+
+    The progress callback runs before a case starts. The result callback
+    runs after that case's measured training interval has finished.
+    """
 
     _validate_hardware(config)
 
@@ -87,11 +101,10 @@ def run_benchmark(
             progress_callback(run_number, total_runs, case)
 
         set_random_seed(case.seed)
-
         model = create_cifar10_resnet18()
 
         data_loader = cast(
-            DataLoader[tuple[torch.Tensor, torch.Tensor]],
+            DataLoader[TrainingBatch],
             create_cifar10_training_loader(
                 data_directory,
                 batch_size=case.batch_size,
@@ -110,13 +123,19 @@ def run_benchmark(
             warmup_batches=config.warmup_batches,
             mixed_precision=config.mixed_precision,
         )
-
-        results.append(
-            _create_benchmark_result(
-                case=case,
-                training_result=training_result,
-            )
+        benchmark_result = _create_benchmark_result(
+            case=case,
+            training_result=training_result,
         )
+        results.append(benchmark_result)
+
+        if result_callback is not None:
+            result_callback(
+                run_number,
+                total_runs,
+                case,
+                benchmark_result,
+            )
 
     return tuple(results)
 
