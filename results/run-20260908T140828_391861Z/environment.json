@@ -1,0 +1,28 @@
+{
+  "architecture": "AMD64",
+  "cpu_model": "Intel(R) Core(TM) Ultra 7 265K",
+  "cuda_available": true,
+  "cuda_build_version": "13.0",
+  "cudnn_version": 92400,
+  "gpus": [
+    {
+      "compute_capability": [
+        12,
+        0
+      ],
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 5070 Ti",
+      "total_memory_bytes": 17094475776
+    }
+  ],
+  "logical_cpu_cores": 20,
+  "operating_system": "Windows-11-10.0.26200-SP0",
+  "physical_cpu_cores": 20,
+  "processor_identifier": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+  "python_version": "3.12.9",
+  "pytorch_version": "2.14.0+cu130",
+  "torch_interop_thread_count": 20,
+  "torch_thread_count": 20,
+  "torchvision_version": "0.29.0+cu130",
+  "total_memory_bytes": 33705484288
+}
